@@ -1,4 +1,8 @@
 # LIST YOUR PYTHON3 PACKAGES HERE
+rospy
+duckietown_msgs
+sensor_msgs
+cv_bridge
 ultralytics
 opencv-python-headless
 numpy
