@@ -58,13 +58,20 @@ RUN dt-pip3-install ${REPO_PATH}/dependencies-py3.txt
 # copy the source code
 COPY ./packages "${REPO_PATH}/packages"
 
+# Install ROS packages
+RUN apt-get update && apt-get install -y \
+    ros-noetic-rospy \
+    ros-noetic-sensor-msgs \
+    ros-noetic-cv-bridge \
+    ros-noetic-image-transport
+
 # build packages
 RUN . /opt/ros/${ROS_DISTRO}/setup.sh && \
   catkin build \
     --workspace ${CATKIN_WS_DIR}/
 
 # install launcher scripts
-COPY ./launchers/. "${LAUNCH_PATH}/"
+# COPY ./launchers/. "${LAUNCH_PATH}/"
 COPY ./launchers/default.sh "${LAUNCH_PATH}/"
 RUN dt-install-launchers "${LAUNCH_PATH}"
 
